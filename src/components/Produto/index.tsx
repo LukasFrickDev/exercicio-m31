@@ -34,7 +34,7 @@ const ProdutoComponent = ({ produto, estaNosFavoritos }: Props) => {
         <strong>{paraReal(produto.preco)}</strong>
       </S.Prices>
       <S.BtnComprar onClick={handleFavoritoClick} type="button">
-        {favorito ? '+ Adicionar aos favoritos' : '- Remover dos favoritos'}
+        {favorito ? '+ Adicionar aos Favoritos' : '- Remover dos favoritos'}
       </S.BtnComprar>
       <S.BtnComprar onClick={() => dispatch(adcionar(produto))} type="button">
         Adicionar ao carrinho
