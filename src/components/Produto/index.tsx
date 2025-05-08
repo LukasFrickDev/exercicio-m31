@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Produto as ProdutoType } from '../../App'
 import * as S from './styles'
 import { useDispatch } from 'react-redux'
@@ -16,6 +17,13 @@ export const paraReal = (valor: number) =>
 
 const ProdutoComponent = ({ produto, estaNosFavoritos }: Props) => {
   const dispatch = useDispatch()
+  const [favorito, setFavorito] = useState(estaNosFavoritos)
+
+  const handleFavoritoClick = () => {
+    dispatch(adcionarFavoritos(produto))
+    setFavorito(!favorito) // Alterna o estado local
+  }
+
   return (
     <S.Produto>
       <S.Capa>
@@ -25,13 +33,8 @@ const ProdutoComponent = ({ produto, estaNosFavoritos }: Props) => {
       <S.Prices>
         <strong>{paraReal(produto.preco)}</strong>
       </S.Prices>
-      <S.BtnComprar
-        onClick={() => dispatch(adcionarFavoritos(produto))}
-        type="button"
-      >
-        {estaNosFavoritos
-          ? '- Remover dos favoritos'
-          : '+ Adicionar aos favoritos'}
+      <S.BtnComprar onClick={handleFavoritoClick} type="button">
+        {favorito ? '+ Adicionar aos favoritos' : '- Remover dos favoritos'}
       </S.BtnComprar>
       <S.BtnComprar onClick={() => dispatch(adcionar(produto))} type="button">
         Adicionar ao carrinho
